@@ -1,0 +1,2 @@
+!function(){var t=document.querySelector("[data-start]"),n=document.querySelector("[data-stop]"),o=null;function e(){return"#".concat(Math.floor(16777215*Math.random()).toString(16).padStart(6,0))}t.addEventListener("click",(function(){o=setInterval((function(){document.body.style.backgroundColor=e(),console.log("I love async JS!")}),1e3)})),n.addEventListener("click",(function(){clearInterval(o),console.log("Interval with id ".concat(o," has stopped!"))}))}();
+//# sourceMappingURL=01-color-switcher.eb63255f.js.map
