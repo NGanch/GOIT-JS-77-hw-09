@@ -7,7 +7,7 @@ import Notiflix from 'notiflix';
 
 const myInput = document.getElementById('datetime-picker');
 const myBtn = document.querySelector('[data-start]');
-
+const timer = document.querySelector('.timer');
 const day = document.querySelector('[data-days]');
 const hour = document.querySelector('[data-hours]');
 const minute = document.querySelector('[data-minutes]');
@@ -28,20 +28,23 @@ const choosseDates = flatpickr(myInput, {
     }
 
     myBtn.removeAttribute('disabled', '');
+
     const targetDates = selectedDates[0];
 
     myBtn.addEventListener('click', clickOnStart);
-    function clickOnStart(){
-       
-        setInterval( () => {
+
+  
+      function clickOnStart(){
+        myBtn.setAttribute('disabled', '');
+        myInput.setAttribute('disabled', '');
+        const limitedInterval = setInterval( () => {
         const currentTime = Date.now();
         const minusDate = convertMs(targetDates - currentTime);
-            // console.log(minusDate);
-        const currentDate = minusDate.days;
-        const currentHour = minusDate.hours;
-        const currentMinute = minusDate.minutes;
-        const currentSecond = minusDate.seconds;
-    
+        let currentDate = minusDate.days;
+        let currentHour = minusDate.hours;
+        let currentMinute = minusDate.minutes;
+        let currentSecond = minusDate.seconds;
+       
         day.textContent = `${currentDate.toString().padStart(2, '0')}`;
         hour.textContent = `${currentHour.toString().padStart(2, '0')}`;
         minute.textContent = ` ${currentMinute.toString().padStart(2, '0')}`;
@@ -50,15 +53,21 @@ const choosseDates = flatpickr(myInput, {
         hour.style.color = 'red';
         minute.style.color = 'red';
         second.style.color = 'red';
+
+        if( currentDate === 0 && currentHour === 0 && currentMinute === 0 && currentSecond === 0){
+          clearInterval(limitedInterval);
+          myBtn.removeAttribute('disabled', '');
+          myInput.removeAttribute('disabled', '');
+          day.style.color = 'black';
+          hour.style.color = 'black';
+          minute.style.color = 'black';
+          second.style.color = 'black';
+        }
         }, 1000)
     }
-
-
-    },
+  },
 });
-  
- // ------------------------------------------
-
+// ------------------------------------------
  function convertMs(ms) {
     // Number of milliseconds per unit of time
     const second = 1000;
@@ -78,4 +87,3 @@ const choosseDates = flatpickr(myInput, {
     return { days, hours, minutes, seconds };
   }
  // ------------------------------------------
-
