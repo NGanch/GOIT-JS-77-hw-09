@@ -13,8 +13,8 @@ function getRandomHexColor() {
   }
 
 startBtn.addEventListener("click", () => {
+  startBtn.setAttribute('disabled', '');
   timerId = setInterval(() => {
-    startBtn.setAttribute('disabled', '');
     document.body.style.backgroundColor = getRandomHexColor();
         console.log('I love async JS!');
   }, 1000);

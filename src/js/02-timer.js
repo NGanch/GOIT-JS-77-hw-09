@@ -56,7 +56,6 @@ const choosseDates = flatpickr(myInput, {
 
         if( currentDate === 0 && currentHour === 0 && currentMinute === 0 && currentSecond === 0){
           clearInterval(limitedInterval);
-          myBtn.removeAttribute('disabled', '');
           myInput.removeAttribute('disabled', '');
           day.style.color = 'black';
           hour.style.color = 'black';
